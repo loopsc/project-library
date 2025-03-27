@@ -19,20 +19,20 @@
     <dialog class="new_book_dialog">
         <div class="add_book_container">
             <p class="heading">Add New Book</p>
-            <form action="" id="frm_new_book" method="dialog">
+            <form action="" id="frm_new_book" method="post">
                 <div class="form_line">
                     <label for="form_title" class="">Title:</label>
-                    <input id="form_title" type="text" placeholder="The Great Gatsby" required>
+                    <input id="form_title" type="text" placeholder="The Great Gatsby" required autocomplete="off">
                 </div>
     
                 <div class="form_line">
                     <label for="form_author">Author:</label>
-                    <input id="form_author" type="text" placeholder="F. Scott Fitzgerald" requried>
+                    <input id="form_author" type="text" placeholder="F. Scott Fitzgerald" required autocomplete="off">
                 </div>
     
                 <div class="form_line">
                     <label for="form_pages">Number of Pages:</label>
-                    <input id="form_pages" type="number" placeholder="140" requried max="9999">
+                    <input id="form_pages" type="number" placeholder="140" required max="9999">
                 </div>
     
                 <div class="form_line">
@@ -41,7 +41,7 @@
                 </div>
     
                 <button class="btn_submit" type="submit">Submit</button>
-                <button class="btn_close" type="submit">Close</button>
+                <button class="btn_close" type="button">Close</button>
             </form>
         </div>
     </dialog>

@@ -59,8 +59,6 @@ body {
     align-items: center;
     gap: 50px;
     padding: 20px;
-    margin-left: 200px;
-    margin-right: 200px;
 
     background-color: rgba(127, 255, 212, 0.39);
     border: 2px solid black;
@@ -93,11 +91,11 @@ input[type="number"] {
     width: 100px;
 }
 
-input[type="checkbox"]{
+input[type="checkbox"] {
     width: 30px;
 }
 
-input[type="checkbox"]:hover{
+input[type="checkbox"]:hover {
     cursor: pointer;
 }
 
@@ -119,4 +117,12 @@ input[type="checkbox"]:hover{
 
 .heading {
     font-size: 50px;
+}
+
+.new_book_dialog {
+    width: 80vw;
+    border: none;
+    border-radius: 15px 50px;
+    justify-self: center;
+    align-self: center;
 }

@@ -80,10 +80,12 @@ showDialogButton.addEventListener('click', () => {
 closeButton.addEventListener('click', (e) => {
     e.preventDefault()
 
+    form.reset()
     dialog.close()
+    
 })
 
-submitButton.addEventListener("click", (e) => {
+form.addEventListener("submit", (e) => {
     e.preventDefault();
 
     title = formInputTitle.value;
@@ -97,9 +99,9 @@ submitButton.addEventListener("click", (e) => {
 
     displayLibrary()
     
-
+    form.reset()
     dialog.close()
-});
+})
 
 function clearFormInputs() {
     formInputTitle.textContent = ''
