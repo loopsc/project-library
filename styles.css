@@ -11,7 +11,6 @@
     margin: 0;
     padding: 0;
     font-family: "Winky Sans", sans-serif;
-    
 }
 
 body {
@@ -22,12 +21,12 @@ body {
 
 .header_banner {
     background-color: var(--hard-black);
-    padding: 20px;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+    padding: 7px;
+    box-shadow: 0 3px 12px rgb(192, 69, 230);
 }
 
 .header_title {
-    font-size: 60px;
+    font-size: calc(3rem + 2vw);
     color: whitesmoke;
     text-align: center;
 }
@@ -35,7 +34,7 @@ body {
 .card_container {
     display: grid;
     /* grid-template-columns: repeat(4, 1fr); */
-    grid-template-columns: repeat(auto-fit, minmax(350px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 20px;
     padding: 20px;
 }
@@ -58,8 +57,8 @@ body {
 }
 
 .btn_add_book {
-    font-size: 24px;
-    padding: 12px;
+    font-size: 1.4rem;
+    padding: calc(4px + 0.7vw);
     margin: 3px;
     background-color: var(--soft-pink);
     border: 2px solid black;
@@ -72,8 +71,8 @@ body {
 
 .btn_add_book:hover {
     cursor: pointer;
-    font-size: 28px;
-    padding: 16px;
+    font-size: 1.5rem;
+    padding: calc(6px + 0.7vw);
     margin: 7px;
 }
 
@@ -114,7 +113,7 @@ input {
     font-size: 1.2rem;
 }
 
-input[type="text"]{
+input[type="text"] {
     min-width: 200px;
 }
 
