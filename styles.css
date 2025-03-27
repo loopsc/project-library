@@ -62,7 +62,6 @@ body {
     margin-left: 200px;
     margin-right: 200px;
 
-
     background-color: rgba(127, 255, 212, 0.39);
     border: 2px solid black;
     border-radius: 15px 50px;
@@ -90,7 +89,7 @@ input {
     font-size: 20px;
 }
 
-form input[type="number"] {
+input[type="number"] {
     width: 100px;
 }
 
@@ -98,7 +97,12 @@ input[type="checkbox"]{
     width: 30px;
 }
 
-.btn_submit {
+input[type="checkbox"]:hover{
+    cursor: pointer;
+}
+
+.btn_submit,
+.btn_close {
     font-size: 24px;
     padding: 12px;
     margin: 3px;
@@ -107,7 +111,8 @@ input[type="checkbox"]{
     border-radius: 12px;
 }
 
-.btn_submit:hover {
+.btn_submit:hover,
+.btn_close:hover {
     cursor: pointer;
     background-color: aquamarine;
 }
