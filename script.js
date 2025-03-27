@@ -16,6 +16,8 @@ function addBookToLibrary(book) {
     myLibrary.push(book);
 }
 
+const root = document.documentElement;
+
 function displayLibrary() {
     const container = document.querySelector(".card_container");
     container.textContent = ''
@@ -40,6 +42,10 @@ function displayLibrary() {
         read_status.classList.add("read_status");
         pages.textContent = `Read: ${book.readStatus ? "Yes" : "No"}`;
 
+        if (!book.readStatus) {
+            card.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--card-pink');
+        }
+
         card.appendChild(title);
         card.appendChild(author);
         card.appendChild(pages);
@@ -49,17 +55,19 @@ function displayLibrary() {
     });
 }
 
-// const book1 = new Book("The Hobbit", "J.R.R. Tolkien", 310, true);
-// const book2 = new Book("1984", "George Orwell", 328, true);
-// const book3 = new Book("To Kill a Mockingbird", "Harper Lee", 281, false);
-// const book4 = new Book("Dune", "Frank Herbert", 412, false);
-// const book5 = new Book("The Catcher in the Rye", "J.D. Salinger", 277, true);
+const book1 = new Book("The Hobbit", "J.R.R. Tolkien", 310, true);
+const book2 = new Book("1984", "George Orwell", 328, true);
+const book3 = new Book("To Kill a Mockingbird", "Harper Lee", 281, false);
+const book4 = new Book("Dune", "Frank Herbert", 412, false);
+const book5 = new Book("The Catcher in the Rye", "J.D. Salinger", 277, true);
 
-// addBookToLibrary(book1);
-// addBookToLibrary(book2);
-// addBookToLibrary(book3);
-// addBookToLibrary(book4);
-// addBookToLibrary(book5);
+addBookToLibrary(book1);
+addBookToLibrary(book2);
+addBookToLibrary(book3);
+addBookToLibrary(book4);
+addBookToLibrary(book5);
+
+displayLibrary()
 
 const showDialogButton = document.querySelector('.btn_add_book')
 const dialog = document.querySelector('.new_book_dialog')
