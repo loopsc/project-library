@@ -52,7 +52,7 @@ function displayLibrary() {
         pages.textContent = `Read: ${book.readStatus ? "Yes" : "No"}`;
 
         const editButton = document.createElement("button");
-        editButton.textContent = "🖉 Edit";
+        editButton.textContent = "🗑 Delete";
         editButton.classList.add("card_edit_button");
 
         if (!book.readStatus) {
@@ -70,7 +70,8 @@ function displayLibrary() {
         editButton.addEventListener("click", () => {
             const bookID = card.getAttribute("data_id");
             const selectedBook = myLibrary.find((book) => book.id === bookID);
-            console.log(selectedBook);
+            removeBookFromLibrary(selectedBook)
+            card.remove()
         });
     });
 }
@@ -80,24 +81,24 @@ const book2 = new Book("1984", "George Orwell", 328, true);
 const book3 = new Book("To Kill a Mockingbird", "Harper Lee", 281, false);
 const book4 = new Book("Dune", "Frank Herbert", 412, false);
 const book5 = new Book("The Catcher in the Rye", "J.D. Salinger", 277, true);
-// const book6 = new Book("Pride and Prejudice", "Jane Austen", 432, true);
-// const book7 = new Book("Moby-Dick", "Herman Melville", 635, false);
-// const book8 = new Book("The Great Gatsby", "F. Scott Fitzgerald", 180, true);
-// const book9 = new Book("War and Peace", "Leo Tolstoy", 1225, false);
-// const book10 = new Book("The Odyssey", "Homer", 560, true);
-// const book11 = new Book("Brave New World", "Aldous Huxley", 311, true);
+const book6 = new Book("Pride and Prejudice", "Jane Austen", 432, true);
+const book7 = new Book("Moby-Dick", "Herman Melville", 635, false);
+const book8 = new Book("The Great Gatsby", "F. Scott Fitzgerald", 180, true);
+const book9 = new Book("War and Peace", "Leo Tolstoy", 1225, false);
+const book10 = new Book("The Odyssey", "Homer", 560, true);
+const book11 = new Book("Brave New World", "Aldous Huxley", 311, true);
 
 addBookToLibrary(book1);
 addBookToLibrary(book2);
 addBookToLibrary(book3);
 addBookToLibrary(book4);
 addBookToLibrary(book5);
-// addBookToLibrary(book6);
-// addBookToLibrary(book7);
-// addBookToLibrary(book8);
-// addBookToLibrary(book9);
-// addBookToLibrary(book10);
-// addBookToLibrary(book11);
+addBookToLibrary(book6);
+addBookToLibrary(book7);
+addBookToLibrary(book8);
+addBookToLibrary(book9);
+addBookToLibrary(book10);
+addBookToLibrary(book11);
 
 displayLibrary();
 
