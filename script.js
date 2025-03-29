@@ -13,6 +13,7 @@ function Book(title, author, pages, readStatus) {
     this.readStatus = readStatus;
 }
 
+// Creates a card with book data
 function createCard(book) {
     const card = document.createElement("div");
     card.classList.add("card");
@@ -77,11 +78,16 @@ function addBookToLibrary(book) {
     myLibrary.push(book);
 }
 
-// Creates a card on the DOM for the corresponding book
+// Adds the card to the DOM
 function addBookToDisplay(book) {
     const container = document.querySelector('.card_container')
     const card = createCard(book)
     container.appendChild(card)
+}
+
+function addBookAndDisplay(book) {
+    addBookToLibrary(book)
+    addBookToDisplay(book)
 }
 
 function removeBookFromLibrary(book) {
@@ -107,10 +113,7 @@ Book.prototype.changeReadStatus = function () {
     this.readStatus = !this.readStatus;
 };
 
-function addBookAndDisplay(book) {
-    addBookToLibrary(book)
-    addBookToDisplay(book)
-}
+
 
 // Function for testing: Generates and adds books to the library
 const generateTemplateBooks = () => {
