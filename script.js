@@ -33,7 +33,7 @@ function displayLibrary() {
     myLibrary.forEach((book) => {
         const card = document.createElement("div");
         card.classList.add("card");
-        card.setAttribute("data_id", book.id);
+        card.setAttribute("data-id", book.id);
 
         const title = document.createElement("p");
         title.classList.add("title");
@@ -68,7 +68,7 @@ function displayLibrary() {
         container.appendChild(card);
 
         deleteButton.addEventListener("click", () => {
-            const bookID = card.getAttribute("data_id");
+            const bookID = card.dataset.id
             const selectedBook = myLibrary.find((book) => book.id === bookID);
             removeBookFromLibrary(selectedBook)
             card.remove()
