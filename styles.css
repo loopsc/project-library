@@ -28,6 +28,7 @@ body {
     display: flex;
     flex-direction: column;
     background-color: var(--soft-black);
+    height: 100%;
 }
 
 .header_banner {
@@ -51,48 +52,52 @@ body {
 }
 
 .card {
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 2px solid black;
     border-radius: 15px 50px;
     background-color: var(--card-aqua);
-    padding: 8px;
-    height: 6rem;
-    transition: height 0.3s ease, box-shadow 0.3s ease;
+    padding: 10px;
+    height: auto;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 
-    word-wrap: break-word
+    overflow-wrap: anywhere;
 }
 
 .card:hover {
-    height: 20vh;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
 }
 
-.card_delete_button {
+.buttons_div {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-top: auto;
+}
+
+.card_buttons {
     width: 33%;
     height: 10%;
     background-color: transparent;
     border: none;
     font-size: 16px;
-    position: absolute;
-    bottom: 15px;
     border-radius: 13px;
     z-index: -1;
 
     visibility: hidden;
     pointer-events: none;
-    transition: visibility 0.1s ease, transform 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
-.card:hover .card_delete_button {
+.card:hover .card_buttons {
     visibility: visible;
     pointer-events: auto;
     z-index: 1;
 }
 
-.card_delete_button:hover {
+.card_buttons:hover {
     cursor: pointer;
     transform: scale(1.3);
 }
@@ -102,7 +107,6 @@ body {
 .pages,
 .read_status {
     font-size: 1.1rem;
-    overflow-wrap: break-word;
     text-align: center;
 }
 
@@ -160,7 +164,6 @@ form {
 }
 
 input {
-    /* width: 20vw; */
     width: clamp(150px, 30vw, 380px);
     height: 2rem;
     padding-left: 0.3rem;

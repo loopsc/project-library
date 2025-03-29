@@ -24,6 +24,10 @@ function removeBookFromLibrary(book) {
     }
 }
 
+Book.prototype.changeReadStatus = function () {
+    this.readStatus = !this.readStatus;
+};
+
 const root = document.documentElement;
 
 function displayLibrary() {
@@ -49,11 +53,18 @@ function displayLibrary() {
 
         const read_status = document.createElement("p");
         read_status.classList.add("read_status");
-        pages.textContent = `Read: ${book.readStatus ? "Yes" : "No"}`;
+        read_status.textContent = `Read: ${book.readStatus ? "Yes" : "No"}`;
+
+        const buttonsDiv = document.createElement("div");
+        buttonsDiv.classList.add("buttons_div");
+
+        const flipReadButton = document.createElement("button");
+        flipReadButton.textContent = "🔄 Edit read";
+        flipReadButton.classList.add("card_buttons");
 
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "🗑 Delete";
-        deleteButton.classList.add("card_delete_button");
+        deleteButton.classList.add("card_buttons");
 
         if (!book.readStatus) {
             card.style.backgroundColor =
@@ -64,14 +75,28 @@ function displayLibrary() {
         card.appendChild(author);
         card.appendChild(pages);
         card.appendChild(read_status);
-        card.appendChild(deleteButton);
+        card.appendChild(buttonsDiv);
+        buttonsDiv.appendChild(flipReadButton);
+        buttonsDiv.appendChild(deleteButton);
         container.appendChild(card);
 
+        flipReadButton.addEventListener("click", () => {
+            book.changeReadStatus();
+            read_status.textContent = `Read: ${book.readStatus ? "Yes" : "No"}`;
+            if (!book.readStatus) {
+                card.style.backgroundColor =
+                    getComputedStyle(root).getPropertyValue("--card-pink");
+            } else {
+                card.style.backgroundColor =
+                    getComputedStyle(root).getPropertyValue("--card-aqua");
+            }
+        });
+
         deleteButton.addEventListener("click", () => {
-            const bookID = card.dataset.id
+            const bookID = card.dataset.id;
             const selectedBook = myLibrary.find((book) => book.id === bookID);
-            removeBookFromLibrary(selectedBook)
-            card.remove()
+            removeBookFromLibrary(selectedBook);
+            card.remove();
         });
     });
 }
@@ -80,7 +105,12 @@ const book1 = new Book("The Hobbit", "J.R.R. Tolkien", 310, true);
 const book2 = new Book("1984", "George Orwell", 328, true);
 const book3 = new Book("To Kill a Mockingbird", "Harper Lee", 281, false);
 const book4 = new Book("Dune", "Frank Herbert", 412, false);
-const book5 = new Book("The Sailor Who Fell from Grace with the Sea", "Yukio Mishima", 277, true);
+const book5 = new Book(
+    "The Sailor Who Fell from Grace with the Sea",
+    "Yukio Mishima",
+    277,
+    true
+);
 const book6 = new Book("Pride and Prejudice", "Jane Austen", 432, true);
 const book7 = new Book("Moby-Dick", "Herman Melville", 635, false);
 const book8 = new Book("The Great Gatsby", "F. Scott Fitzgerald", 180, true);
