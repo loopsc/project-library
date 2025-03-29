@@ -28,12 +28,14 @@ body {
     display: flex;
     flex-direction: column;
     background-color: var(--soft-black);
+    justify-content: center;
 }
 
 .header_banner {
     background-color: var(--hard-black);
     padding: 7px;
     box-shadow: 0 3px 12px rgb(192, 69, 230);
+    width: auto;
 }
 
 .header_title {
@@ -45,7 +47,6 @@ body {
 .card_container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    /* grid-template-columns: repeat(auto-fit, clamp(230px, 300px, 1fr)); */
     margin: 10px;
     gap: 20px;
     padding: 12px;
