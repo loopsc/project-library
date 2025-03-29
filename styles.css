@@ -16,7 +16,11 @@
 
 @media (max-width: 320px) {
     html {
-        font-size: 10px;
+        font-size: 14px;
+    }
+
+    .card_container {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
 }
 
@@ -41,6 +45,7 @@ body {
 .card_container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    margin: 10px;
     gap: 20px;
     padding: 12px;
 }
@@ -53,15 +58,16 @@ body {
     border: 2px solid black;
     border-radius: 15px 50px;
     background-color: var(--card-aqua);
-    padding: 6px;
-    height: 95px;
+    padding: 8px;
+    height: 6rem;
     transition: height 0.3s ease, box-shadow 0.3s ease;
+
+    word-wrap: break-word
 }
 
 .card:hover {
     height: 20vh;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    
 }
 
 .card_delete_button {
@@ -95,7 +101,9 @@ body {
 .author,
 .pages,
 .read_status {
-    font-size: large;
+    font-size: 1.1rem;
+    overflow-wrap: break-word;
+    text-align: center;
 }
 
 .btn_add_book {
@@ -132,12 +140,15 @@ body {
     border-radius: 15px 50px;
 }
 
+.form_div {
+    padding: calc(1.2vh + 10px);
+}
+
 form {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    /* font-size:  calc(10px + 2vw); */
-    font-size: clamp(20px, calc(10px + 1vw), 50px);
+    font-size: 1.5rem;
     color: azure;
 }
 
@@ -171,9 +182,8 @@ input[type="checkbox"]:hover {
 
 .btn_submit,
 .btn_close {
-    /* font-size: 24px; */
-    /* font-size: calc(10px + 2vw); */
-    font-size: clamp(20px, calc(10px + 1vw), 50px);
+    font-size: 1.5rem;
+    /* font-size: clamp(20px, calc(10px + 1vw), 50px); */
     padding: calc(2px + 0.2vw);
     margin: 0.2rem;
     background-color: var(--soft-pink);
@@ -190,14 +200,13 @@ input[type="checkbox"]:hover {
     transform: scale(1.1);
 }
 
-.heading {
-    font-size: calc(20px + 3vw);
+.form_heading {
+    font-size: 2.5rem;
     color: azure;
     text-align: center;
 }
 
 .new_book_dialog {
-    
     border: none;
     border-radius: 15px 50px;
     justify-self: center;
