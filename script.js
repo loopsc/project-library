@@ -51,9 +51,9 @@ function displayLibrary() {
         read_status.classList.add("read_status");
         pages.textContent = `Read: ${book.readStatus ? "Yes" : "No"}`;
 
-        const editButton = document.createElement("button");
-        editButton.textContent = "🗑 Delete";
-        editButton.classList.add("card_edit_button");
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "🗑 Delete";
+        deleteButton.classList.add("card_delete_button");
 
         if (!book.readStatus) {
             card.style.backgroundColor =
@@ -64,10 +64,10 @@ function displayLibrary() {
         card.appendChild(author);
         card.appendChild(pages);
         card.appendChild(read_status);
-        card.appendChild(editButton);
+        card.appendChild(deleteButton);
         container.appendChild(card);
 
-        editButton.addEventListener("click", () => {
+        deleteButton.addEventListener("click", () => {
             const bookID = card.getAttribute("data_id");
             const selectedBook = myLibrary.find((book) => book.id === bookID);
             removeBookFromLibrary(selectedBook)

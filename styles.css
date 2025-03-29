@@ -14,6 +14,12 @@
     font-family: "Winky Sans", sans-serif;
 }
 
+@media (max-width: 320px) {
+    html {
+        font-size: 10px;
+    }
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -34,9 +40,9 @@ body {
 
 .card_container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
-    padding: 20px;
+    padding: 12px;
 }
 
 .card {
@@ -58,7 +64,7 @@ body {
     
 }
 
-.card_edit_button {
+.card_delete_button {
     width: 33%;
     height: 10%;
     background-color: transparent;
@@ -67,18 +73,20 @@ body {
     position: absolute;
     bottom: 15px;
     border-radius: 13px;
+    /* z-index: -1; */
 
-    opacity: 0;
+    visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: visibility 0.1s ease, transform 0.3s ease;
 }
 
-.card:hover .card_edit_button {
-    opacity: 1;
+.card:hover .card_delete_button {
+    visibility: visible;
     pointer-events: auto;
+    /* z-index: 1; */
 }
 
-.card_edit_button:hover {
+.card_delete_button:hover {
     cursor: pointer;
     transform: scale(1.3);
 }
@@ -116,9 +124,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3rem;
-    padding: 20px;
-    width: clamp(400px, 60vw,80vw);
+    padding: 12px;
+    width: clamp(250px, 60vw,80vw);
 
     background-color: var(--soft-black);
     border: 5px dashed black;
@@ -128,8 +135,8 @@ body {
 form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    font-size: 2rem;
+    gap: 10px;
+    font-size:  calc(10px + 2vw);
     color: azure;
 }
 
@@ -141,19 +148,16 @@ form {
 }
 
 input {
-    width: 20vw;
+    /* width: 20vw; */
+    width: clamp(150px, 30vw, 380px);
     height: 2rem;
     padding-left: 0.3rem;
     font-size: 1.2rem;
 }
 
-input[type="text"] {
-    min-width: 200px;
-}
-
 input[type="number"] {
     width: 10vw;
-    min-width: 85px;
+    min-width: 50px;
 }
 
 input[type="checkbox"] {
@@ -167,23 +171,25 @@ input[type="checkbox"]:hover {
 .btn_submit,
 .btn_close {
     /* font-size: 24px; */
-    font-size: 1.5rem;
-    padding: 1rem;
+    font-size: calc(10px + 2vw);
+    padding: calc(2px + 1vw);
     margin: 0.2rem;
     background-color: var(--soft-pink);
     border: 1px dashed black;
     border-radius: 12px;
+    transition: transform 0.3 ease;
 }
 
 .btn_submit:hover,
 .btn_close:hover {
     cursor: pointer;
     background-color: var(--hard-pink);
-    font-size: 2rem;
+    /* font-size: 2rem; */
+    transform: scale(1.1);
 }
 
 .heading {
-    font-size: 4rem;
+    font-size: calc(20px + 3vw);
     color: azure;
     text-align: center;
 }
