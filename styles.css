@@ -35,7 +35,6 @@ body {
     background-color: var(--hard-black);
     padding: 7px;
     box-shadow: 0 3px 12px rgb(192, 69, 230);
-    width: auto;
 }
 
 .header_title {
