@@ -28,7 +28,6 @@ body {
     display: flex;
     flex-direction: column;
     background-color: var(--soft-black);
-    height: 100%;
 }
 
 .header_banner {
