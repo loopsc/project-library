@@ -73,7 +73,7 @@ body {
     position: absolute;
     bottom: 15px;
     border-radius: 13px;
-    /* z-index: -1; */
+    z-index: -1;
 
     visibility: hidden;
     pointer-events: none;
@@ -83,7 +83,7 @@ body {
 .card:hover .card_delete_button {
     visibility: visible;
     pointer-events: auto;
-    /* z-index: 1; */
+    z-index: 1;
 }
 
 .card_delete_button:hover {
@@ -125,7 +125,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 12px;
-    width: clamp(250px, 60vw,80vw);
+    width: clamp(250px, 60vw, 600px);
 
     background-color: var(--soft-black);
     border: 5px dashed black;
@@ -136,7 +136,8 @@ form {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    font-size:  calc(10px + 2vw);
+    /* font-size:  calc(10px + 2vw); */
+    font-size: clamp(20px, calc(10px + 1vw), 50px);
     color: azure;
 }
 
@@ -171,8 +172,9 @@ input[type="checkbox"]:hover {
 .btn_submit,
 .btn_close {
     /* font-size: 24px; */
-    font-size: calc(10px + 2vw);
-    padding: calc(2px + 1vw);
+    /* font-size: calc(10px + 2vw); */
+    font-size: clamp(20px, calc(10px + 1vw), 50px);
+    padding: calc(2px + 0.2vw);
     margin: 0.2rem;
     background-color: var(--soft-pink);
     border: 1px dashed black;
