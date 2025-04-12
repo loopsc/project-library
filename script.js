@@ -19,6 +19,8 @@ class Library {
 
 }
 
+const myLibrary = new Library;
+
 class Book {
     constructor(title, author, pages, readStatus) {
         this._id = crypto.randomUUID();
@@ -33,89 +35,98 @@ class Book {
     }
 }
 
-const myLibrary = new Library;
-
-// Creates a card with book data
-function createCard(book) {
-    const card = document.createElement("div");
-    card.classList.add("card");
-    card.setAttribute("data-id", book.id);
-
-    const title = document.createElement("p");
-    title.classList.add("title");
-    title.textContent = `Title: ${book.title}`;
-
-    const author = document.createElement("p");
-    author.classList.add("author");
-    author.textContent = `Author: ${book.author}`;
-
-    const pages = document.createElement("p");
-    pages.classList.add("pages");
-    pages.textContent = `Pages: ${book.pages}`;
-
-    const read_status = document.createElement("p");
-    read_status.classList.add("read_status");
-    read_status.textContent = `Read: ${book.readStatus ? "Yes" : "No"}`;
-
-    const buttonsDiv = document.createElement("div");
-    buttonsDiv.classList.add("buttons_div");
-
-    const flipReadButton = document.createElement("button");
-    flipReadButton.textContent = "🔄 Edit read";
-    flipReadButton.classList.add("card_buttons");
-
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "🗑 Delete";
-    deleteButton.classList.add("card_buttons");
-
-    // Changes the card bg colour to pink if not read
-    if (!book.readStatus) {
-        card.style.backgroundColor =
-            getComputedStyle(root).getPropertyValue("--card-pink");
+class BookCard {
+    constructor(book) {
+        this.book = book
+        this.card = this.createCard();
     }
 
-    card.appendChild(title);
-    card.appendChild(author);
-    card.appendChild(pages);
-    card.appendChild(read_status);
-    card.appendChild(buttonsDiv);
-    buttonsDiv.appendChild(flipReadButton);
-    buttonsDiv.appendChild(deleteButton);
+    createCard() {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.setAttribute("data-id", this.book.id);
+    
+        const title = document.createElement("p");
+        title.classList.add("title");
+        title.textContent = `Title: ${this.book.title}`;
+    
+        const author = document.createElement("p");
+        author.classList.add("author");
+        author.textContent = `Author: ${this.book.author}`;
+    
+        const pages = document.createElement("p");
+        pages.classList.add("pages");
+        pages.textContent = `Pages: ${this.book.pages}`;
+    
+        const read_status = document.createElement("p");
+        read_status.classList.add("read_status");
+        read_status.textContent = `Read: ${this.book.readStatus ? "Yes" : "No"}`;
+    
+        const buttonsDiv = document.createElement("div");
+        buttonsDiv.classList.add("buttons_div");
+    
+        const flipReadButton = document.createElement("button");
+        flipReadButton.textContent = "🔄 Edit read";
+        flipReadButton.classList.add("card_buttons");
+    
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "🗑 Delete";
+        deleteButton.classList.add("card_buttons");
+    
+        // Changes the card bg colour to pink if not read
+        if (!this.book.readStatus) {
+            card.style.backgroundColor =
+                getComputedStyle(root).getPropertyValue("--card-pink");
+        }
+    
+        card.appendChild(title);
+        card.appendChild(author);
+        card.appendChild(pages);
+        card.appendChild(read_status);
+        card.appendChild(buttonsDiv);
+        buttonsDiv.appendChild(flipReadButton);
+        buttonsDiv.appendChild(deleteButton);
+    
+        flipReadButton.addEventListener("click", () => {
+            this.book.changeReadStatus();
+            this.updateCardColour();
+        });
+    
+        deleteButton.addEventListener("click", () => {
+            myLibrary.removeBookFromLibrary(card.dataset.id);
+            card.remove();
+        });
+    
+        return card;
+    }
 
-    flipReadButton.addEventListener("click", () => {
-        book.changeReadStatus();
-        updateCardColour(book);
-    });
+    updateCardColour() {
+        const card = this.card;
+        if (card) {
+            const read_status = card.querySelector(".read_status");
+            read_status.textContent = `Read: ${this.book.readStatus ? "Yes" : "No"}`;
+            card.style.backgroundColor = this.book.readStatus
+                ? getComputedStyle(root).getPropertyValue("--card-aqua")
+                : getComputedStyle(root).getPropertyValue("--card-pink");
+        }
+    }
 
-    deleteButton.addEventListener("click", () => {
-        myLibrary.removeBookFromLibrary(card.dataset.id);
-        card.remove();
-    });
-
-    return card;
+    renderCard(parentElement) {
+        parentElement.appendChild(this.card)
+    }
 }
 
 // Adds the card to the DOM
 function addBookToDisplay(book) {
     const container = document.querySelector(".card_container");
-    const card = createCard(book);
-    container.appendChild(card);
+
+    const card = new BookCard(book)
+    card.renderCard(container)
 }
 
 function addBookAndDisplay(book) {
     myLibrary.addBookToLibrary(book);
     addBookToDisplay(book);
-}
-
-function updateCardColour(book) {
-    const card = document.querySelector(`.card[data-id="${book.id}"]`);
-    if (card) {
-        const read_status = card.querySelector(".read_status");
-        read_status.textContent = `Read: ${book.readStatus ? "Yes" : "No"}`;
-        card.style.backgroundColor = book.readStatus
-            ? getComputedStyle(root).getPropertyValue("--card-aqua")
-            : getComputedStyle(root).getPropertyValue("--card-pink");
-    }
 }
 
 // Function for testing: Generates and adds books to the library
@@ -154,7 +165,6 @@ const generateTemplateBooks = () => {
     addBookAndDisplay(book10);
     addBookAndDisplay(book11);
 };
-
 generateTemplateBooks();
 
 const showDialogButton = document.querySelector(".btn_add_book");
