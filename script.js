@@ -1,17 +1,39 @@
-const myLibrary = [];
 const root = document.documentElement;
 
-function Book(title, author, pages, readStatus) {
-    if (!new.target) {
-        throw Error("Must invoke 'new' argument");
+class Library {
+    constructor() {
+        this.books = []
     }
 
-    this.id = crypto.randomUUID();
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.readStatus = readStatus;
+    addBookToLibrary(book) {
+        this.books.push(book)
+    }
+
+    removeBookFromLibrary(book) {
+        for(let i = 0; i < this.books.length; i++) {
+            if(book.id === this.books[i].id) {
+                this.books.splice(i,1)
+            }
+        }
+    }
+
 }
+
+class Book {
+    constructor(title, author, pages, readStatus) {
+        this._id = crypto.randomUUID();
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.readStatus = readStatus;
+    }
+
+    changeReadStatus() {
+        this.readStatus  = !this.readStatus
+    }
+}
+
+const myLibrary = new Library;
 
 // Creates a card with book data
 function createCard(book) {
@@ -62,40 +84,27 @@ function createCard(book) {
 
     flipReadButton.addEventListener("click", () => {
         book.changeReadStatus();
-        updateCardColour(book)
+        updateCardColour(book);
     });
 
     deleteButton.addEventListener("click", () => {
-        removeBookFromLibrary(card.dataset.id);
+        myLibrary.removeBookFromLibrary(card.dataset.id);
         card.remove();
     });
 
     return card;
 }
 
-// Adds the book to the library array
-function addBookToLibrary(book) {
-    myLibrary.push(book);
-}
-
 // Adds the card to the DOM
 function addBookToDisplay(book) {
-    const container = document.querySelector('.card_container')
-    const card = createCard(book)
-    container.appendChild(card)
+    const container = document.querySelector(".card_container");
+    const card = createCard(book);
+    container.appendChild(card);
 }
 
 function addBookAndDisplay(book) {
-    addBookToLibrary(book)
-    addBookToDisplay(book)
-}
-
-function removeBookFromLibrary(book) {
-    for (let i = 0; i < myLibrary.length; i++) {
-        if (book.id === myLibrary[i].id) {
-            myLibrary.splice(i, 1);
-        }
-    }
+    myLibrary.addBookToLibrary(book);
+    addBookToDisplay(book);
 }
 
 function updateCardColour(book) {
@@ -108,12 +117,6 @@ function updateCardColour(book) {
             : getComputedStyle(root).getPropertyValue("--card-pink");
     }
 }
-
-Book.prototype.changeReadStatus = function () {
-    this.readStatus = !this.readStatus;
-};
-
-
 
 // Function for testing: Generates and adds books to the library
 const generateTemplateBooks = () => {
@@ -129,26 +132,30 @@ const generateTemplateBooks = () => {
     );
     const book6 = new Book("Pride and Prejudice", "Jane Austen", 432, true);
     const book7 = new Book("Moby-Dick", "Herman Melville", 635, false);
-    const book8 = new Book("The Great Gatsby", "F. Scott Fitzgerald", 180, true);
+    const book8 = new Book(
+        "The Great Gatsby",
+        "F. Scott Fitzgerald",
+        180,
+        true
+    );
     const book9 = new Book("War and Peace", "Leo Tolstoy", 1225, false);
     const book10 = new Book("The Odyssey", "Homer", 560, true);
     const book11 = new Book("Brave New World", "Aldous Huxley", 311, true);
 
-    addBookAndDisplay(book1)
-    addBookAndDisplay(book2)
-    addBookAndDisplay(book3)
-    addBookAndDisplay(book4)
-    addBookAndDisplay(book5)
-    addBookAndDisplay(book6)
-    addBookAndDisplay(book7)
-    addBookAndDisplay(book8)
-    addBookAndDisplay(book9)
-    addBookAndDisplay(book10)
-    addBookAndDisplay(book11)
-}
+    addBookAndDisplay(book1);
+    addBookAndDisplay(book2);
+    addBookAndDisplay(book3);
+    addBookAndDisplay(book4);
+    addBookAndDisplay(book5);
+    addBookAndDisplay(book6);
+    addBookAndDisplay(book7);
+    addBookAndDisplay(book8);
+    addBookAndDisplay(book9);
+    addBookAndDisplay(book10);
+    addBookAndDisplay(book11);
+};
 
-generateTemplateBooks()
-
+generateTemplateBooks();
 
 const showDialogButton = document.querySelector(".btn_add_book");
 const dialog = document.querySelector(".new_book_dialog");
@@ -184,7 +191,7 @@ form.addEventListener("submit", (e) => {
 
     const book = new Book(title, author, pages, read);
 
-    addBookAndDisplay(book)
+    addBookAndDisplay(book);
 
     form.reset();
     dialog.close();
