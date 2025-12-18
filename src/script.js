@@ -1,17 +1,27 @@
 import "./styles.css";
 import BookCard from "./BookCard.js";
 import Book from "./Book.js";
-import Library from "./Library.js";
 import * as Utils from "./utils.js";
+import myLibrary from "./Library.js";
+import { saveProjects, loadProjects } from "./storage.js";
 
-const myLibrary = new Library();
+const container = document.querySelector(".card_container");
 
 function addBookAndDisplay(book) {
-    const container = document.querySelector(".card_container");
+    myLibrary.addBook(book);
 
-    myLibrary.addBookToLibrary(book);
     new BookCard(book).renderCard(container);
 }
+
+const displayBooks = () => {
+    myLibrary.books.forEach((b) => new BookCard(b).renderCard(container));
+};
+
+console.log(myLibrary.books);
+
+loadProjects();
+
+displayBooks();
 
 // Function for testing: Generates and adds books to the library
 const generateTemplateBooks = () => {
@@ -21,7 +31,9 @@ const generateTemplateBooks = () => {
 
     books.forEach((book) => addBookAndDisplay(book));
 };
-generateTemplateBooks();
+// generateTemplateBooks();
+
+// ===Form/Modal===
 
 const addBookBtn = document.querySelector(".btn_add_book");
 const dialog = document.querySelector(".new_book_dialog");
@@ -45,19 +57,16 @@ closeButton.addEventListener("click", (e) => {
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const formInputTitle = document.getElementById("form_title");
-    const formInputAuthor = document.getElementById("form_author");
-    const formInputPages = document.getElementById("form_pages");
-    const formInputRead = document.getElementById("form_read_status");
-
-    title = formInputTitle.value;
-    author = formInputAuthor.value;
-    pages = formInputPages.value;
-    read = formInputRead.checked;
+    const title = document.getElementById("form_title").value;
+    const author = document.getElementById("form_author").value;
+    const pages = document.getElementById("form_pages").value;
+    const read = document.getElementById("form_read_status").checked;
 
     const book = new Book(title, author, pages, read);
 
     addBookAndDisplay(book);
+
+    saveProjects();
 
     form.reset();
     dialog.close();

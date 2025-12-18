@@ -1,9 +1,14 @@
+import { saveProjects } from "./storage";
+import myLibrary from "./Library";
+
 const root = document.documentElement;
 
 export default class BookCard {
     constructor(book) {
         this.book = book;
         this.card = this.createCard();
+
+        console.log(this.book);
     }
 
     createCard() {
@@ -57,11 +62,13 @@ export default class BookCard {
         flipReadButton.addEventListener("click", () => {
             this.book.changeReadStatus();
             this.updateCardColour();
+            saveProjects();
         });
 
         deleteButton.addEventListener("click", () => {
-            myLibrary.removeBookFromLibrary(card.dataset.id);
+            myLibrary.removeBook(card.dataset.id);
             card.remove();
+            saveProjects();
         });
 
         return card;

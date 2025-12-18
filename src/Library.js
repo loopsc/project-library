@@ -1,17 +1,20 @@
-export default class Library {
+let instance;
+
+class Library {
     constructor() {
+        if (Library.instance) return Library.instance;
+        instance = this;
         this.books = [];
     }
 
-    addBookToLibrary(book) {
+    addBook(book) {
         this.books.push(book);
     }
 
-    removeBookFromLibrary(book) {
-        for (let i = 0; i < this.books.length; i++) {
-            if (book.id === this.books[i].id) {
-                this.books.splice(i, 1);
-            }
-        }
+    removeBook(bookId) {
+        this.books = this.books.filter((b) => b.id !== bookId);
     }
 }
+
+const myLibrary = new Library();
+export default myLibrary;
