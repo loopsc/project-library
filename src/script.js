@@ -1,3 +1,4 @@
+import './styles.css'
 const root = document.documentElement;
 
 class Library {
