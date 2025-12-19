@@ -40,7 +40,7 @@ function loadProjects() {
     const stored = localStorage.getItem("library");
 
     if (!stored) {
-        throw new Error("Couldn't retrieve items from local storage");
+        return;
     }
 
     const books = JSON.parse(stored);
